@@ -1,0 +1,93 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "testMatch": [
+      "<rootDir>/**/*.(spec|test).{ts,tsx}"
+    ],
+    "testURL": "http://localhost",
+    "rootDir": ".",
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
+  "name": "use-debounced-loader",
+  "author": "Sebastian Frysztak",
+  "module": "dist/use-debounced-loader.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/use-debounced-loader.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/use-debounced-loader.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.7.0",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "husky": "^4.3.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-test-renderer": "^17.0.1",
+    "size-limit": "^4.7.0",
+    "ts-jest": "^25.5.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.5"
+  }
+}
