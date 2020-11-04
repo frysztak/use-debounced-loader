@@ -4,15 +4,15 @@ type TimerHandle = ReturnType<typeof setTimeout>;
 type State = {
   time: number | null;
   done: boolean;
-}
+};
 
 export function useTimer() {
-  const [state, setState] = useState<State>({time: null, done: false});
+  const [state, setState] = useState<State>({ time: null, done: false });
   const timerId = useRef<TimerHandle | null>(null);
 
   const start = useCallback(
     (ms: number) => {
-      setState({time: ms, done: false});
+      setState({ time: ms, done: false });
     },
     [setState]
   );
@@ -20,7 +20,7 @@ export function useTimer() {
   useEffect(() => {
     if (!timerId.current && state.time) {
       timerId.current = setTimeout(() => {
-        setState({time: null, done: true});
+        setState({ time: null, done: true });
         timerId.current = null;
       }, state.time);
     }

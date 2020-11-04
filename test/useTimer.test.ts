@@ -6,34 +6,31 @@ jest.useFakeTimers();
 describe('useTimer', () => {
   it('updates `done` flag', () => {
     const { result } = renderHook(() => useTimer());
+    const advanceAndAssert = (ms: number, state: boolean) => {
+      act(() => {
+        jest.advanceTimersByTime(ms);
+      });
+      expect(result.current.done).toEqual(state);
+    };
+
+    const time = 200;
+
     expect(result.current.done).toEqual(false);
     act(() => {
-      result.current.start(200);
+      result.current.start(time);
     });
 
-    act(() => {
-      jest.advanceTimersByTime(199);
-    });
-    expect(result.current.done).toEqual(false);
-
-    act(() => {
-      jest.advanceTimersByTime(1);
-    });
-    expect(result.current.done).toEqual(true);
+    advanceAndAssert(time - 1, false);
+    advanceAndAssert(1, true);
   });
 
   it('calls `clearTimeout` when unmounted', () => {
     const spy = jest.spyOn(window, 'clearTimeout');
     const { result, unmount } = renderHook(() => useTimer());
-    expect(result.current.done).toEqual(false);
+
     act(() => {
       result.current.start(200);
     });
-
-    act(() => {
-      jest.advanceTimersByTime(20);
-    });
-    expect(result.current.done).toEqual(false);
 
     unmount();
     expect(spy).toHaveBeenCalled();
@@ -41,35 +38,21 @@ describe('useTimer', () => {
 
   it('can be reused', () => {
     const { result } = renderHook(() => useTimer());
-    expect(result.current.done).toEqual(false);
-    act(() => {
-      result.current.start(200);
-    });
+    const advanceAndAssert = (ms: number, state: boolean) => {
+      act(() => {
+        jest.advanceTimersByTime(ms);
+      });
+      expect(result.current.done).toEqual(state);
+    };
 
-    // run 1
-    act(() => {
-      jest.advanceTimersByTime(199);
-    });
-    expect(result.current.done).toEqual(false);
+    const times = [200, 50];
+    for (const time of times) {
+      act(() => {
+        result.current.start(time);
+      });
 
-    act(() => {
-      jest.advanceTimersByTime(1);
-    });
-    expect(result.current.done).toEqual(true);
-
-    // run 2
-    act(() => {
-      result.current.start(50);
-    });
-    expect(result.current.done).toEqual(false);
-    act(() => {
-      jest.advanceTimersByTime(49);
-    });
-    expect(result.current.done).toEqual(false);
-
-    act(() => {
-      jest.advanceTimersByTime(1);
-    });
-    expect(result.current.done).toEqual(true);
+      advanceAndAssert(time - 1, false);
+      advanceAndAssert(1, true);
+    }
   });
 });
