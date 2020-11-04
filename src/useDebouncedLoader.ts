@@ -1,46 +1,58 @@
-import {  useEffect, useReducer} from 'react';
+import { useEffect, useReducer } from 'react';
 import { useTimer } from './useTimer';
 
-type State = 'off' | 'delay' | 'on';
+type State =
+  | 'off'
+  | 'delayTrigger'
+  | 'delayWait'
+  | 'onTrigger'
+  | 'onWait'
+  | 'on';
+type Action = {
+  isLoading: boolean;
+  timerDone: boolean;
+};
 
-const reducer = (state: State, isLoading: boolean): State => {
+const reducer = (state: State, action: Action): State => {
+  const { isLoading, timerDone } = action;
   switch (state) {
     case 'off': {
-      return isLoading ? 'delay' : 'off';
+      return isLoading ? 'delayTrigger' : 'off';
     }
-    case 'delay': {
-      return isLoading ? 'on' : 'off';
+    case 'delayTrigger': {
+      return isLoading ? 'delayWait' : 'off';
     }
-
-
+    case 'delayWait': {
+      return timerDone ? 'onTrigger' : 'delayWait';
+    }
+    case 'onTrigger': {
+      return 'onWait';
+    }
+    case 'onWait': {
+      return timerDone ? 'on' : 'onWait';
+    }
     case 'on': {
       return isLoading ? 'on' : 'off';
     }
   }
 };
 
-export function useDebouncedLoader(isLoading: boolean): boolean {
-  const [state, dispatch] = useReducer(reducer, isLoading ? 'delay' : 'off');
+export function useDebouncedLoader(
+  isLoading: boolean,
+  initialDelay: number = 400,
+  minimalTimeOn: number = 400
+): boolean {
+  const [state, dispatch] = useReducer(reducer, 'off');
   const { start, done } = useTimer();
 
   useEffect(() => {
-    if (state === 'off') {
-      dispatch(isLoading);
-    } else if (state === 'delay') {
-      if (done) {
-        dispatch(isLoading);
-      } else {
-        start(300);
-      }
-    } else if (state === 'on') {
-      if (done) {
-        dispatch(isLoading);
-      } else {
-        start(400);
-      }
+    if (state === 'delayTrigger') {
+      start(initialDelay);
+    } else if (state === 'onTrigger') {
+      start(minimalTimeOn);
     }
-  }, [state, isLoading, start, done]);
+    dispatch({ isLoading, timerDone: done });
+  }, [state, isLoading, start, done, initialDelay, minimalTimeOn]);
 
-  return state === 'on' ? true : false;
+  return state === 'on' || state === 'onWait';
 }
-
