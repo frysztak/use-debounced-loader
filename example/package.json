@@ -8,7 +8,10 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "react-app-polyfill": "^1.0.0"
+    "@chakra-ui/core": "^1.0.0-rc.8",
+    "framer-motion": "^2.9.4",
+    "react-app-polyfill": "^1.0.0",
+    "react-timing-hooks": "^2.0.0"
   },
   "alias": {
     "react": "../node_modules/react",
