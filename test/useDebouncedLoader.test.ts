@@ -29,6 +29,7 @@ describe('useDebouncedLoader', () => {
     expect(result.current).toEqual(false);
 
     advanceAndAssert(50, false);
+    advanceAndAssert(500, false);
   });
 
   it('goes high when tON > tDELAY', () => {
@@ -60,6 +61,7 @@ describe('useDebouncedLoader', () => {
     advanceAndAssert(minimalTimeOn - 1, true);
     advanceAndAssert(1, false);
     advanceAndAssert(201, false);
+    advanceAndAssert(500, false);
   });
 
   it('stays high when tON > tDELAY + tMIN', () => {
@@ -90,5 +92,6 @@ describe('useDebouncedLoader', () => {
     rerender({ isLoading: false });
     expect(result.current).toEqual(false);
     advanceAndAssert(50, false);
+    advanceAndAssert(500, false);
   });
 });

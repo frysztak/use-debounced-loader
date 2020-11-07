@@ -23,10 +23,10 @@ const reducer = (state: State, action: Action): State => {
       return isLoading ? 'delayWait' : 'off';
     }
     case 'delayWait': {
-      return timerDone ? 'onTrigger' : 'delayWait';
+      return isLoading ? (timerDone ? 'onTrigger' : 'delayWait') : 'off';
     }
     case 'onTrigger': {
-      return 'onWait';
+      return isLoading ? 'onWait' : 'off';
     }
     case 'onWait': {
       return timerDone ? 'on' : 'onWait';
