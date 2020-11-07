@@ -72,10 +72,7 @@ export function useWaveforms(params: WaveformHooksParams) {
     if (status === 'done') {
       return;
     }
-    console.log('time', time);
-    console.log('deb', debouncedIsLoading);
     if (scanMode && !startTime) {
-      console.log('startTime', time);
       setStartTime(time);
       setStatus('delay');
     }
@@ -86,32 +83,24 @@ export function useWaveforms(params: WaveformHooksParams) {
       setStatus('high');
       setOriginalOffset(now);
       setIsLoading(true);
-      console.log('isloading start', time);
     } else if (status === 'high' && now >= requestOffset + requestDuration) {
       setStatus('low');
       setOriginalLength(now - originalOffset!);
       setIsLoading(false);
-      console.log('isloading end', time);
     } else if (status === 'low' && now >= totalLength) {
       setStatus('done');
     }
 
     if (debouncedIsLoading && !debouncedOffset) {
       setDebouncedOffset(now);
-
-      console.log('start', time);
     } else if (!debouncedIsLoading && !debouncedLength && debouncedOffset) {
       setDebouncedLength(now - debouncedOffset);
-      console.log('end', now - debouncedOffset);
     }
 
     if (debouncedIsLoading2 && !debouncedOffset2) {
       setDebouncedOffset2(now);
-
-      console.log('start2', time);
     } else if (!debouncedIsLoading2 && !debouncedLength2 && debouncedOffset2) {
       setDebouncedLength2(now - debouncedOffset2);
-      console.log('end2', now - debouncedOffset2);
     }
 
     setX((now * 100) / totalLength);
