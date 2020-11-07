@@ -12,7 +12,7 @@ export function LoaderDemo() {
   const [debounceDelay, setDebounceDelay] = React.useState(300);
   const [debounceTimeOn, setDebounceTimeOn] = React.useState(500);
 
-  const totalLength = 4000;
+  const totalLength = 3000;
 
   const {
     x,
