@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/core';
+import { Heading, HStack, Spinner } from '@chakra-ui/core';
 import * as React from 'react';
 import { PulseWave } from './PulseWave';
 
@@ -12,6 +12,10 @@ export interface WavesformsProps {
 
   debouncedOffset2: number | null;
   debouncedLength2: number;
+
+  isLoading: boolean;
+  debouncedIsLoading: boolean;
+  debouncedIsLoading2: boolean;
 }
 
 export function Waveforms(props: WavesformsProps) {
@@ -24,36 +28,51 @@ export function Waveforms(props: WavesformsProps) {
     debouncedLength,
     debouncedOffset2,
     debouncedLength2,
+
+    isLoading,
+    debouncedIsLoading,
+    debouncedIsLoading2,
   } = props;
 
   return (
     <>
       <Heading size="lg">Original signal</Heading>
-      <PulseWave
-        highOffset={((originalOffset ?? totalLength) * 100) / totalLength}
-        highLength={((originalLength ?? totalLength) * 100) / totalLength}
-        x={x}
-      />
+      <HStack width={'full'}>
+        <PulseWave
+          highOffset={((originalOffset ?? totalLength) * 100) / totalLength}
+          highLength={((originalLength ?? totalLength) * 100) / totalLength}
+          x={x}
+        />
+        <Spinner opacity={isLoading ? 1 : 0} />
+      </HStack>
+
       <Heading size="lg">useDebouncedLoader()</Heading>
-      <PulseWave
-        highOffset={
-          debouncedOffset !== null
-            ? (debouncedOffset * 100) / totalLength
-            : null
-        }
-        highLength={((debouncedLength ?? totalLength) * 100) / totalLength}
-        x={x}
-      />
+      <HStack width={'full'}>
+        <PulseWave
+          highOffset={
+            debouncedOffset !== null
+              ? (debouncedOffset * 100) / totalLength
+              : null
+          }
+          highLength={((debouncedLength ?? totalLength) * 100) / totalLength}
+          x={x}
+        />
+        <Spinner opacity={debouncedIsLoading ? 1 : 0} />
+      </HStack>
+
       <Heading size="lg">useDebounce()</Heading>
-      <PulseWave
-        highOffset={
-          debouncedOffset2 !== null
-            ? (debouncedOffset2 * 100) / totalLength
-            : null
-        }
-        highLength={((debouncedLength2 ?? totalLength) * 100) / totalLength}
-        x={x}
-      />
+      <HStack width={'full'}>
+        <PulseWave
+          highOffset={
+            debouncedOffset2 !== null
+              ? (debouncedOffset2 * 100) / totalLength
+              : null
+          }
+          highLength={((debouncedLength2 ?? totalLength) * 100) / totalLength}
+          x={x}
+        />
+        <Spinner opacity={debouncedIsLoading2 ? 1 : 0} />
+      </HStack>
     </>
   );
 }

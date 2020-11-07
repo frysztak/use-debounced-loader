@@ -26,6 +26,10 @@ export function LoaderDemo() {
 
     debouncedOffset2,
     debouncedLength2,
+
+    isLoading,
+    debouncedIsLoading,
+    debouncedIsLoading2,
   } = useWaveforms({
     scanMode: runAnimation,
     requestOffset: requestOffset,
@@ -89,6 +93,9 @@ export function LoaderDemo() {
           debouncedOffset={debouncedOffset}
           debouncedLength2={debouncedLength2 ?? totalLength}
           debouncedOffset2={debouncedOffset2}
+          isLoading={isLoading}
+          debouncedIsLoading={debouncedIsLoading}
+          debouncedIsLoading2={debouncedIsLoading2}
         />
       </VStack>
     </Container>

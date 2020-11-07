@@ -116,5 +116,8 @@ export function useWaveforms(params: WaveformHooksParams) {
     debouncedOffset2,
     debouncedLength2,
     x,
+    isLoading,
+    debouncedIsLoading,
+    debouncedIsLoading2,
   };
 }
