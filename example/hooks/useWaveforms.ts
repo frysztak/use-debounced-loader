@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useDebouncedLoader } from './../../';
 import useAnimationFrameLoop from './useAnimationFrameLoop';
 import { unstable_batchedUpdates } from 'react-dom';
+import { useDebounce } from 'use-debounce';
 
 export interface WaveformHooksParams {
   totalLength: number;
@@ -32,17 +33,21 @@ export function useWaveforms(params: WaveformHooksParams) {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [originalOffset, setOriginalOffset] = useState<number | null>(null);
+  const [originalLength, setOriginalLength] = useState<number | null>(null);
+
   const [debouncedOffset, setDebouncedOffset] = useState<number | null>(null);
   const [debouncedLength, setDebouncedLength] = useState<number | null>(null);
 
-  const [originalOffset, setOriginalOffset] = useState<number | null>(null);
-  const [originalLength, setOriginalLength] = useState<number | null>(null);
+  const [debouncedOffset2, setDebouncedOffset2] = useState<number | null>(null);
+  const [debouncedLength2, setDebouncedLength2] = useState<number | null>(null);
 
   const debouncedIsLoading = useDebouncedLoader(
     isLoading,
     debounceDelay,
     debounceTimeOn
   );
+  const [debouncedIsLoading2] = useDebounce(isLoading, debounceDelay);
 
   const reset = useCallback(() => {
     unstable_batchedUpdates(() => {
@@ -50,10 +55,14 @@ export function useWaveforms(params: WaveformHooksParams) {
       setStatus('low');
       setStartTime(null);
       setIsLoading(false);
-      setDebouncedOffset(null);
-      setDebouncedLength(null);
       setOriginalLength(null);
       setOriginalOffset(null);
+
+      setDebouncedOffset(null);
+      setDebouncedLength(null);
+
+      setDebouncedOffset2(null);
+      setDebouncedLength2(null);
     });
   }, []);
 
@@ -96,6 +105,15 @@ export function useWaveforms(params: WaveformHooksParams) {
       console.log('end', now - debouncedOffset);
     }
 
+    if (debouncedIsLoading2 && !debouncedOffset2) {
+      setDebouncedOffset2(now);
+
+      console.log('start2', time);
+    } else if (!debouncedIsLoading2 && !debouncedLength2 && debouncedOffset2) {
+      setDebouncedLength2(now - debouncedOffset2);
+      console.log('end2', now - debouncedOffset2);
+    }
+
     setX((now * 100) / totalLength);
   });
 
@@ -106,6 +124,8 @@ export function useWaveforms(params: WaveformHooksParams) {
     originalLength,
     debouncedOffset,
     debouncedLength,
+    debouncedOffset2,
+    debouncedLength2,
     x,
   };
 }

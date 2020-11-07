@@ -4,11 +4,14 @@ import { PulseWave } from './PulseWave';
 
 export interface WavesformsProps {
   totalLength: number;
+  x: number;
   originalOffset: number;
   originalLength: number;
   debouncedOffset: number | null;
   debouncedLength: number;
-  x: number;
+
+  debouncedOffset2: number | null;
+  debouncedLength2: number;
 }
 
 export function Waveforms(props: WavesformsProps) {
@@ -19,6 +22,8 @@ export function Waveforms(props: WavesformsProps) {
     originalLength,
     debouncedOffset,
     debouncedLength,
+    debouncedOffset2,
+    debouncedLength2,
   } = props;
 
   return (
@@ -29,7 +34,7 @@ export function Waveforms(props: WavesformsProps) {
         highLength={((originalLength ?? totalLength) * 100) / totalLength}
         x={x}
       />
-      <Heading size="lg">Debounced signal</Heading>
+      <Heading size="lg">useDebouncedLoader()</Heading>
       <PulseWave
         highOffset={
           debouncedOffset !== null
@@ -37,6 +42,16 @@ export function Waveforms(props: WavesformsProps) {
             : null
         }
         highLength={((debouncedLength ?? totalLength) * 100) / totalLength}
+        x={x}
+      />
+      <Heading size="lg">useDebounce()</Heading>
+      <PulseWave
+        highOffset={
+          debouncedOffset2 !== null
+            ? (debouncedOffset2 * 100) / totalLength
+            : null
+        }
+        highLength={((debouncedLength2 ?? totalLength) * 100) / totalLength}
         x={x}
       />
     </>
