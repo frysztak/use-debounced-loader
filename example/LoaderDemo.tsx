@@ -7,8 +7,8 @@ import { useWaveforms } from './hooks/useWaveforms';
 
 export function LoaderDemo() {
   const [runAnimation, setRunAnimation] = React.useState(true);
-  const [requestOffset, setRequestOffset] = React.useState(150);
-  const [requestDuration, setRequestDuration] = React.useState(800);
+  const [requestOffset, setRequestOffset] = React.useState(100);
+  const [requestDuration, setRequestDuration] = React.useState(500);
   const [debounceDelay, setDebounceDelay] = React.useState(300);
   const [debounceTimeOn, setDebounceTimeOn] = React.useState(500);
 

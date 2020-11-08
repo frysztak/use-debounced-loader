@@ -26,6 +26,7 @@ export function TimeSlider(props: TimeSliderProps) {
         onChange={onValueChange}
         min={minValue}
         max={maxValue}
+        step={20}
       >
         <SliderTrack>
           <SliderFilledTrack />
