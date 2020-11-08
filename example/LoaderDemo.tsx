@@ -1,16 +1,17 @@
-import { VStack, Container, Heading } from '@chakra-ui/core';
+import { VStack, Container, Heading, Button } from '@chakra-ui/core';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TimeSlider } from './components/TimeSlider';
 import { Waveforms } from './components/Waveforms';
 import { useWaveforms } from './hooks/useWaveforms';
 
 export function LoaderDemo() {
-  const [runAnimation, setRunAnimation] = React.useState(true);
-  const [requestOffset, setRequestOffset] = React.useState(100);
-  const [requestDuration, setRequestDuration] = React.useState(500);
-  const [debounceDelay, setDebounceDelay] = React.useState(300);
-  const [debounceTimeOn, setDebounceTimeOn] = React.useState(500);
+  const [runAnimation, setRunAnimation] = useState(false);
+  const [requestOffset, setRequestOffset] = useState(100);
+  const [requestDuration, setRequestDuration] = useState(500);
+  const [debounceDelay, setDebounceDelay] = useState(300);
+  const [debounceTimeOn, setDebounceTimeOn] = useState(500);
+  const [startClicked, setStartClicked] = useState(false);
 
   const totalLength = 3000;
 
@@ -18,18 +19,18 @@ export function LoaderDemo() {
     x,
     done,
     reset,
+
+    isLoading,
     originalOffset,
     originalLength,
 
+    debouncedIsLoading,
     debouncedOffset,
     debouncedLength,
 
+    debouncedIsLoading2,
     debouncedOffset2,
     debouncedLength2,
-
-    isLoading,
-    debouncedIsLoading,
-    debouncedIsLoading2,
   } = useWaveforms({
     scanMode: runAnimation,
     requestOffset: requestOffset,
@@ -39,11 +40,25 @@ export function LoaderDemo() {
     totalLength: totalLength,
   });
 
-  useEffect(() => {
+  const start = useCallback(() => {
+    setStartClicked(true);
     reset();
-
     setRunAnimation(true);
-  }, [requestOffset, requestDuration, debounceDelay, debounceTimeOn, reset]);
+  }, [reset]);
+
+  useEffect(() => {
+    if (startClicked) {
+      start();
+    }
+  }, [
+    requestOffset,
+    requestDuration,
+    debounceDelay,
+    debounceTimeOn,
+    reset,
+    start,
+    startClicked,
+  ]);
 
   useEffect(() => {
     if (done) {
@@ -83,6 +98,10 @@ export function LoaderDemo() {
           maxValue={1000}
           onValueChange={setDebounceTimeOn}
         />
+
+        <Button size="lg" onClick={start} disabled={runAnimation}>
+          Start
+        </Button>
 
         <Waveforms
           totalLength={totalLength}
