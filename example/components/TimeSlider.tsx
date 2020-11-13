@@ -10,13 +10,14 @@ import * as React from 'react';
 
 export interface TimeSliderProps {
   name: string;
+  disabled: boolean;
   value: number;
   minValue: number;
   maxValue: number;
   onValueChange: (ms: number) => void;
 }
 export function TimeSlider(props: TimeSliderProps) {
-  const { name, value, minValue, maxValue, onValueChange } = props;
+  const { name, disabled, value, minValue, maxValue, onValueChange } = props;
   return (
     <HStack width={'full'} spacing={4}>
       <Box flexBasis={'30%'}>{name}</Box>
@@ -27,6 +28,7 @@ export function TimeSlider(props: TimeSliderProps) {
         min={minValue}
         max={maxValue}
         step={20}
+        isDisabled={disabled}
       >
         <SliderTrack>
           <SliderFilledTrack />

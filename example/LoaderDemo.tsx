@@ -8,9 +8,9 @@ import { useWaveforms } from './hooks/useWaveforms';
 export function LoaderDemo() {
   const [runAnimation, setRunAnimation] = useState(false);
   const [requestOffset, setRequestOffset] = useState(100);
-  const [requestDuration, setRequestDuration] = useState(500);
+  const [requestDuration, setRequestDuration] = useState(1000);
   const [debounceDelay, setDebounceDelay] = useState(300);
-  const [debounceTimeOn, setDebounceTimeOn] = useState(500);
+  const [debounceTimeOn, setDebounceTimeOn] = useState(600);
   const [startClicked, setStartClicked] = useState(false);
 
   const totalLength = 3000;
@@ -50,15 +50,7 @@ export function LoaderDemo() {
     if (startClicked) {
       start();
     }
-  }, [
-    requestOffset,
-    requestDuration,
-    debounceDelay,
-    debounceTimeOn,
-    reset,
-    start,
-    startClicked,
-  ]);
+  }, [start, startClicked]);
 
   useEffect(() => {
     if (done) {
@@ -76,13 +68,15 @@ export function LoaderDemo() {
           minValue={0}
           maxValue={400}
           onValueChange={setRequestOffset}
+          disabled={runAnimation}
         />
         <TimeSlider
           name="Request duration"
           value={requestDuration}
           minValue={20}
-          maxValue={1000}
+          maxValue={1500}
           onValueChange={setRequestDuration}
+          disabled={runAnimation}
         />
         <TimeSlider
           name="Debounce delay"
@@ -90,6 +84,7 @@ export function LoaderDemo() {
           minValue={1}
           maxValue={1000}
           onValueChange={setDebounceDelay}
+          disabled={runAnimation}
         />
         <TimeSlider
           name="Debounce time on"
@@ -97,6 +92,7 @@ export function LoaderDemo() {
           minValue={1}
           maxValue={1000}
           onValueChange={setDebounceTimeOn}
+          disabled={runAnimation}
         />
 
         <Button size="lg" onClick={start} disabled={runAnimation}>
@@ -106,6 +102,7 @@ export function LoaderDemo() {
         <Waveforms
           totalLength={totalLength}
           x={x}
+          requestOffset={requestOffset}
           originalLength={originalLength ?? totalLength}
           originalOffset={originalOffset ?? totalLength}
           debouncedLength={debouncedLength ?? totalLength}

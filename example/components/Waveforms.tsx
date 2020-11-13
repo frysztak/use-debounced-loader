@@ -5,6 +5,8 @@ import { PulseWave } from './PulseWave';
 export interface WavesformsProps {
   totalLength: number;
   x: number;
+  requestOffset: number;
+
   originalOffset: number;
   originalLength: number;
   debouncedOffset: number | null;
@@ -22,6 +24,8 @@ export function Waveforms(props: WavesformsProps) {
   const {
     totalLength,
     x,
+    requestOffset,
+
     originalOffset,
     originalLength,
     debouncedOffset,
@@ -42,6 +46,8 @@ export function Waveforms(props: WavesformsProps) {
           highOffset={((originalOffset ?? totalLength) * 100) / totalLength}
           highLength={((originalLength ?? totalLength) * 100) / totalLength}
           x={x}
+          tickStart={requestOffset}
+          totalLength={totalLength}
         />
         <Spinner opacity={isLoading ? 1 : 0} />
       </HStack>
@@ -56,6 +62,8 @@ export function Waveforms(props: WavesformsProps) {
           }
           highLength={((debouncedLength ?? totalLength) * 100) / totalLength}
           x={x}
+          tickStart={requestOffset}
+          totalLength={totalLength}
         />
         <Spinner opacity={debouncedIsLoading ? 1 : 0} />
       </HStack>
@@ -70,6 +78,8 @@ export function Waveforms(props: WavesformsProps) {
           }
           highLength={((debouncedLength2 ?? totalLength) * 100) / totalLength}
           x={x}
+          tickStart={requestOffset}
+          totalLength={totalLength}
         />
         <Spinner opacity={debouncedIsLoading2 ? 1 : 0} />
       </HStack>
