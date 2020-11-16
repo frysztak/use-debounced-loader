@@ -1,8 +1,9 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ChakraProvider, extendTheme } from '@chakra-ui/core';
+import { Box, ChakraProvider, extendTheme, Flex } from '@chakra-ui/core';
 import { LoaderDemo } from './LoaderDemo';
+import { Footer } from './components/Footer';
 
 const config = {
   useSystemColorMode: false,
@@ -13,9 +14,13 @@ const customTheme = extendTheme({ config });
 const App = () => {
   return (
     <ChakraProvider theme={customTheme}>
-      <div>
-        <LoaderDemo />
-      </div>
+      <Flex minH="100vh" flexDirection="column">
+        <Box flexGrow={1}>
+          <LoaderDemo />
+        </Box>
+
+        <Footer />
+      </Flex>
     </ChakraProvider>
   );
 };

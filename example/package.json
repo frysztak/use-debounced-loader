@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.8",
+    "@emotion-icons/boxicons-logos": "^2.10.0",
     "framer-motion": "^2.9.4",
     "react-app-polyfill": "^1.0.0",
     "react-timing-hooks": "^2.0.0",
