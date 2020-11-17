@@ -17,7 +17,8 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "docs": "typedoc --plugin typedoc-plugin-markdown  --excludeNotExported --readme none --hideBreadcrumbs --exclude '**/index.tsx'"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -88,6 +89,8 @@
     "ts-jest": "^25.5.1",
     "tsdx": "^0.14.1",
     "tslib": "^2.0.3",
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-markdown": "^3.0.11",
     "typescript": "^4.0.5"
   }
 }

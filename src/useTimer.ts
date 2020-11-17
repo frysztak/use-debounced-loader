@@ -6,7 +6,20 @@ type State = {
   done: boolean;
 };
 
-export function useTimer() {
+/**
+ * Hook-based wrapper for `setTimeout()`.
+ */
+export function useTimer(): {
+  /**
+   * Indicates whether timer has finished.
+   */
+  done: boolean;
+
+  /**
+   * Function that starts the timer. Takes number of miliseconds to wait out.
+   */
+  start: (ms: number) => void;
+} {
   const [state, setState] = useState<State>({ time: null, done: false });
   const timerId = useRef<TimerHandle | null>(null);
 

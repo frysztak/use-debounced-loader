@@ -37,6 +37,14 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
+/**
+ * Debounces `isLoading` input. If `isLoading` remains `true` for at least `initialDelay` miliseconds, this hook
+ * will returns `true` for `minimalTimeOn` miliseconds.
+ * @param isLoading - Input signal you wish to debounce (usually it connects to a spinner and indicates a pending operation)
+ * @param initialDelay - Delay in miliseconds. Requests shorter than `initialDelay` will be ignored.
+ * @param minimalTimeOn - Once spinner appears, it will stay on screen for a least `minimalTimeOn` miliseconds.
+ * @returns Debounced `isLoading` signal
+ */
 export function useDebouncedLoader(
   isLoading: boolean,
   initialDelay: number = 400,
