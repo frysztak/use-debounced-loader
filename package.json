@@ -1,5 +1,8 @@
 {
+  "name": "use-debounced-loader",
   "version": "0.1.0",
+  "author": "Sebastian Frysztak",
+  "description": "Tiny React hook designed to debounce loaders/spinners",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -63,8 +66,6 @@
       "jest-watch-typeahead/testname"
     ]
   },
-  "name": "use-debounced-loader",
-  "author": "Sebastian Frysztak",
   "module": "dist/use-debounced-loader.esm.js",
   "size-limit": [
     {

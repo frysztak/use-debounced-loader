@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" width="200px" height="200px" alt="logo">
+  <img src="https://raw.githubusercontent.com/frysztak/use-debounced-loader/main/logo.svg" width="200px" height="200px" alt="logo">
   <h2 align="center">useDebouncedLoader</h2>
   <p align="center">
     ✨ Configurable hook to avoid flickering spinners
@@ -9,11 +9,34 @@
   </p>
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/use-debounced-loader" target="_blank">
+    <img src="https://badgen.net/npm/v/use-debounced-loader">
+  </a>
+  <a href="#">
+    <img src="https://badgen.net/npm/dt/use-debounced-loader">
+  </a>
+	<a href="#">
+		<img src="https://badgen.net/npm/license/use-debounced-loader">
+	</a>
+  <br />
+  <a href="#">
+    <img src="https://badgen.net/bundlephobia/minzip/use-debounced-loader">
+  </a>
+  <a href="#">
+    <img src="https://badgen.net/bundlephobia/dependency-count/use-debounced-loader">
+  </a>
+  <a href="#">
+    <img src="https://badgen.net/npm/types/use-debounced-loader">
+  </a>
+</p>
+
 ## Table of Contents
 
 - [📜 About](#-about)
 - [🏁 Getting started](#-getting-started)
 - [👨‍💻 Development](#-development)
+- [🙏 Acknowledgements](#-acknowledgements)
 
 ## 📜 About
 
@@ -74,7 +97,6 @@ Pull requests are very welcome. This projects has been bootstrapped with awesome
 
 Demo app uses [Chakra-UI](https://chakra-ui.com/) and [react-timing-hooks](https://github.com/EricLambrecht/react-timing-hooks).
 
-<br />
-<br />
-<br />
+## 🙏 Acknowledgements
+
 Logo adapted from icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>.

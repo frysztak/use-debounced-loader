@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url https://frysztak.github.io/use-debounced-loader --no-source-maps"
   },
   "dependencies": {
     "@chakra-ui/core": "^1.0.0-rc.8",
