@@ -8,9 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
@@ -25,16 +24,15 @@ jobs:
         run: |
           yarn install --frozen-lock-file
           yarn build
-        
+
       - name: Deploy demo page
         uses: JamesIves/github-pages-deploy-action@3.7.1
-        working-directory: example
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages 
-          FOLDER: dist 
+          BRANCH: gh-pages
+          FOLDER: example/dist
           CLEAN: true
-      
+
       - name: Publish
         run: npm publish
         env:
