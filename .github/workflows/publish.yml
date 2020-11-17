@@ -8,12 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install and build
+      - name: Checkout
         uses: actions/checkout@v1
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+
+      - name: Install and build
         run: |
           yarn install --frozen-lock-file
           yarn build

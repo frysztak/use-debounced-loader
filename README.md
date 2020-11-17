@@ -29,7 +29,7 @@ debouncing spinners shown when your app is awaiting some API response. However, 
 
 This library aims to avoid both flickering and lingering spinners. It does so by introducing another parameter called `minimalTimeOn`. That's the minimal time spinner will stay on screen.
 
-For more details, see (a very short!) API [docs](https://github.com/frysztak/use-debounced-loader/docs). You can also check out [comparison](https://frysztak.github.io/use-debounced-loader/) with a popular [useDebounce](https://github.com/xnimorz/use-debounce) library.
+For more details, see (a very short!) API [docs](https://github.com/frysztak/use-debounced-loader/blob/main/docs/modules/_usedebouncedloader_.md). You can also check out [comparison](https://frysztak.github.io/use-debounced-loader/) with a popular [useDebounce](https://github.com/xnimorz/use-debounce) library.
 
 ## 🏁 Getting Started
 
