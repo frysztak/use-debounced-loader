@@ -1,5 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { act, renderHook } from '@testing-library/react-hooks';
-import { useTimer } from '../.';
+import { useTimer } from '../src';
 
 jest.useFakeTimers();
 

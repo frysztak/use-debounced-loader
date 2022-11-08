@@ -1,5 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { act, renderHook } from '@testing-library/react-hooks';
-import { useDebouncedLoader } from '../.';
+import { useDebouncedLoader } from '../src';
 
 jest.useFakeTimers();
 
